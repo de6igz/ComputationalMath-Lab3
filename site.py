@@ -56,10 +56,7 @@ class Result:
     #  4. DOUBLE epsilon
     #
 
-    def calculate_integral(self,a, b, f, epsilon):
-        error_message = self.error_message
-
-        hasDiscontinuity = self.has_discontinuity
+    def calculate_integral(a, b, f, epsilon):
         if a >= b:
             # интеграл должен иметь отрицательное значение, если a > b
             sign = -1
@@ -76,21 +73,21 @@ class Result:
             try:
                 f_val = f(x_val)
             except:
-                error_message = "Integrated function has discontinuity or does not defined in current interval"
-                hasDiscontinuity = True
+                Result.error_message = "Integrated function has discontinuity or does not defined in current interval"
+                Result.has_discontinuity = True
                 break
 
         # Если функция f непрерывна, вычислим интеграл
-        if not hasDiscontinuity:
+        if not Result.has_discontinuity:
             integral = 0
             for x in range(n):
                 x_val = a + (x + 0.5) * epsilon
                 integral += f(x_val)
             integral *= epsilon
             integral *= sign
-            return integral, error_message, hasDiscontinuity
+            return integral
         else:
-            return None, error_message, hasDiscontinuity
+            return None
 
 
 # Write your code here
@@ -103,6 +100,7 @@ if __name__ == '__main__':
     f = int(input().strip())
 
     epsilon = float(input().strip())
+
 
     result = Result.calculate_integral(a, b, f, epsilon)
     if not Result.has_discontinuity:
