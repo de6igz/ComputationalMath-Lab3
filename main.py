@@ -1,16 +1,22 @@
-# This is a sample Python script.
-
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+import trapezoid_method
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+def main():
+    print("Выберите уравнение:\n"
+          "1. 1/x\n"
+          "2. sin(0.001)/0.001 + sin(-0.001)/-0.001/2\n"
+          "3. x^2 + 2\n"
+          "4. 2x+2")
+    variant = int(input())
+    print("Введите левую границу интервала")
+    a = int(input())
+    print("Введите правую границу интервала")
+    b = int(input())
+    print("Введите точность")
+    epsilon = float(input())
+    result = trapezoid_method.calculate_integral(a=a, b=b, f=variant, epsilon=epsilon)
+    print(f'Результат: {result}')
 
 
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    main()
